@@ -14,13 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:      
       - name: Docker Compose Action
-        with:
-          compose-file: ./docker-compose.yml
+        run: docker-compose up -d
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
+  security:
+      - name: security check
         run: security-checker security:check composer.lock
 
-      # Runs a set of commands using the runners shell
+  test:
       - name: testing
         run: composer test
