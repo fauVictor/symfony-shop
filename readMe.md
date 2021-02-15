@@ -1,0 +1,1 @@
+![clean](https://github.com/fauVictor/symfony-shop/actions/build/workflows/Greet%20Everyone/badge.svg)
