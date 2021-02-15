@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+    database:
+        container_name: 'database'
+        image: 'mysql:latest'
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: ${DATABASE_NAME}
+            MYSQL_USER: ${DATABASE_USER}
+            MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+        ports:
+            - 3306:3306
+    php:
+        container_name: "php-fpm"
+        build:
+            context: ./config/infrastructure/php
+        environment:
+            - APP_ENV=${APP_ENV}
+            - APP_SECRET=${APP_SECRET}
+        depends_on: 
+            - database
+        volumes:
+            - ./:/var/www
+    phpmyadmin: 
+        image: 'phpmyadmin/phpmyadmin'
+        restart: always
+        environment:
+            PMA_HOST: database
+            MYSQL_DATABASE: ${DATABASE_NAME}
+            MYSQL_USER: ${DATABASE_USER}
+        ports: 
+            - 8080:80
+        links: 
+            - database:mysql
+        depends_on: 
+            - php
+            - database
+
+    nginx:
+        container_name: "nginx"
+        build:
+            context: ./config/infrastructure/nginx
+        volumes:
+            - ./:/var/www
+            - ./config/infrastructure/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./config/infrastructure/nginx/logs:/var/log/nginx/
+        depends_on:
+            - php
+            - database
+        ports:
+            - "80:80"
