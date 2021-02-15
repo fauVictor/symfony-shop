@@ -1,1 +1,1 @@
-![clean](https://github.com/fauVictor/symfony-shop/actions/build/workflows/Greet%20Everyone/badge.svg)
+![example workflow name](https://github.com/actions/cicd/workflows/code%20clean/badge.svg)
