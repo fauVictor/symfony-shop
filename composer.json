@@ -1,4 +1,6 @@
 {
+    "name": "vendor_name/shop",
+    "description": "Application for testing symfony 5.2 and php 8",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "dev",
