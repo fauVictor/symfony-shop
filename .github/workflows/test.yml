@@ -1,8 +1,6 @@
 name: cicd
-
 on:
   push:
-
   pull_request:
     branches: [ master ]
 
