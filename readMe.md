@@ -1,1 +1,4 @@
-![example workflow name](https://github.com/actions/cicd/workflows/code%20clean/badge.svg)
+![AppVeyor tests (branch)](https://img.shields.io/appveyor/tests/fauVictor/symfony-shop/master?style=plastic)
+
+# Symfony - shop basics
+
