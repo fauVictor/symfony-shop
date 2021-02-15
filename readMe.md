@@ -1,4 +1,4 @@
-![AppVeyor tests (branch)](https://img.shields.io/appveyor/tests/fauVictor/symfony-shop/master?style=plastic)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/fauVictor/symfony-shop/cicd/master)
 
 # Symfony - shop basics
 
