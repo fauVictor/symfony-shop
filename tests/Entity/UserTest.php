@@ -2,6 +2,7 @@
 
 namespace App\Tests\Entity;
 
+use App\Entity\Adress;
 use App\Entity\User;
 use DateTime;
 use PHPUnit\Framework\TestCase;
@@ -12,6 +13,13 @@ class UserTest extends KernelTestCase
     public function testIsValid(): void
     {
         $user = new User();
+
+        $adress = (new Adress())
+                  ->setNumber('123')
+                  ->setStreet('rue de la paix')
+                  ->setZipcode('75000')
+                  ->setCity('Paris')
+                  ->setCountry('France');
 
         $user->setEmail('true@true.com');
         $user->setPassword('password');
@@ -24,6 +32,8 @@ class UserTest extends KernelTestCase
         $user->setCreatedAt(new DateTime('2021-01-01T00:00:00.000000'));
         $user->setUpdatedAt(new DateTime('2021-01-01T00:00:00.000000'));
 
+        $user->addAdress($adress);
+
         $this->assertEquals($user->getEmail(), 'true@true.com');
         $this->assertEquals($user->getPassword(), 'password');
         $this->assertEquals($user->getRoles(), ['ROLE_TEST', 'ROLE_USER']);
@@ -32,6 +42,8 @@ class UserTest extends KernelTestCase
         $this->assertEquals($user->getFirstname(), 'Victor');
         $this->assertEquals($user->getLastname(), 'FAU');
         $this->assertEquals($user->getIdentity(), 'M. Victor FAU');
+
+        $this->assertEquals($adress, $user->getAdresses()[0]);        
 
         $this->assertEquals($user->getCreatedAt(), new DateTime('2021-01-01T00:00:00.000000'));
         $this->assertEquals($user->getUpdatedAt(), new DateTime('2021-01-01T00:00:00.000000'));

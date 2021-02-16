@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-
 use DateTimeInterface;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use App\Entity\Adress;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -25,15 +27,11 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * 
-     * @var string the email
      */
     private string $email;
     
     /**
      * @ORM\Column(type="string")
-     * 
-     * @var string the hashed password
      */
     private string $password;
 
@@ -45,22 +43,16 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string")
-     * 
-     * @var string the civility
      */
     private string $civility;
 
     /**
      * @ORM\Column(type="string")
-     * 
-     * @var string the firstname
      */
     private string $firstname;
 
     /**
      * @ORM\Column(type="string")
-     * 
-     * @var string the lastname
      */
     private string $lastname;
 
@@ -73,6 +65,16 @@ class User implements UserInterface
      * @ORM\Column(type="datetime")
      */
     private DateTimeInterface $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Adress::class, mappedBy="user", orphanRemoval=true)
+     */
+    private Collection $adresses;
+
+    public function __construct()
+    {
+        $this->adresses = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -238,5 +240,29 @@ class User implements UserInterface
     public function eraseCredentials():void
     {
 
+    }
+
+    /**
+     * @return Collection<int, Adress>
+     */
+    public function getAdresses(): Collection
+    {
+        return $this->adresses;
+    }
+
+    public function addAdress(Adress $adress): self
+    {
+        if (!$this->adresses->contains($adress)) {
+            $this->adresses[] = $adress;
+            $adress->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdress(Adress $adress): self
+    {
+        $this->adresses->removeElement($adress);
+        return $this;
     }
 }
