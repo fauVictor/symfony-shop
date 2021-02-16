@@ -89,10 +89,10 @@
             "@auto-scripts"
         ],
         "test": [
-            "./vendor/bin/phpstan analyse src --level=8 --ansi",
+            "./vendor/bin/phpstan analyse src --level=5 --ansi",
             "./bin/phpunit --testdox"
         ],
-        "testing": "./vendor/bin/phpstan analyse src --level=8 --ansi",
+        "testing": "./vendor/bin/phpstan analyse src --level=5 --ansi",
         "migrations": "symfony console make:migration && symfony console doctrine:migrations:migrate -n"
     },
     "conflict": {
