@@ -45,8 +45,6 @@ class Article
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="articles")
-     * 
-     * @var Collection<int, Category> 
      */
     private Collection $categories;
 
@@ -115,9 +113,6 @@ class Article
         $this->displayed = $displayed;
     }
 
-    /**
-     * @return Collection<int, Category>
-     */
     public function getCategories(): Collection
     {
         return $this->categories;

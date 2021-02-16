@@ -26,8 +26,6 @@ class Category
 
     /**
      * @ORM\ManyToMany(targetEntity=Article::class, inversedBy="categories")
-     * 
-     * @var Collection<int, Article>
      */
     private Collection $articles;
 
@@ -52,10 +50,7 @@ class Category
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Article>
-     */
+    
     public function getArticles(): Collection
     {
         return $this->articles;

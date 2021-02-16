@@ -27,15 +27,11 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * 
-     * @var string the email
      */
     private string $email;
     
     /**
      * @ORM\Column(type="string")
-     * 
-     * @var string the hashed password
      */
     private string $password;
 
@@ -47,22 +43,16 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string")
-     * 
-     * @var string the civility
      */
     private string $civility;
 
     /**
      * @ORM\Column(type="string")
-     * 
-     * @var string the firstname
      */
     private string $firstname;
 
     /**
      * @ORM\Column(type="string")
-     * 
-     * @var string the lastname
      */
     private string $lastname;
 
@@ -78,8 +68,6 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Adress::class, mappedBy="user", orphanRemoval=true)
-     * 
-     * @var ArrayCollection<int, Adress>
      */
     private Collection $adresses;
 
