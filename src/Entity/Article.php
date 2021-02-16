@@ -34,6 +34,16 @@ class Article
     private float $price;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private int $stock;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $displayed;
+
+    /**
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="articles")
      * 
      * @var Collection<int, Category> 
@@ -84,6 +94,25 @@ class Article
         $this->price = $price;
 
         return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(int $stock): void
+    {
+        $this->stock = $stock;
+    }
+    public function getDisplayed(): ?bool
+    {
+        return $this->displayed;
+    }
+
+    public function setDisplayed(bool $displayed): void
+    {
+        $this->displayed = $displayed;
     }
 
     /**
